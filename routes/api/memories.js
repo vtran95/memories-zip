@@ -5,6 +5,7 @@ var memoriesCtrl = require('../../controllers/memories-controller');
 /*---------- Protected Routes ----------*/
 
 router.get('/', checkAuth, memoriesCtrl.index);
+router.post('/', checkAuth, memoriesCtrl.create);
 
 /*----- Helper Functions -----*/
 

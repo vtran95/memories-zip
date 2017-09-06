@@ -1,7 +1,13 @@
 import React, {Component} from 'react';
+import {
+    Switch,
+    Route,
+    Link
+} from 'react-router-dom';
 import './IndexPage.css';
 import memoriesAPI from '../../../utils/memoriesAPI';
 import MemoriesList from '../../../components/MemoriesList/MemoriesList';
+import CreatePage from '../CreatePage/CreatePage';
 
 class IndexPage extends Component {
     constructor() {
@@ -21,8 +27,17 @@ class IndexPage extends Component {
         return (
             <div>
                 <h2>Memories</h2>
-                <a href='/'>Back</a>
-                <MemoriesList memories={this.state.memories} />
+                <Link to='/memories/new'>New</Link>
+                &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                <Link to='/'>Back</Link>
+                <Switch>
+                    <Route exact path='/memories' render={() => 
+                        <MemoriesList memories={this.state.memories} />
+                    }/>
+                    <Route exact path='/memories/new' render={() => 
+                        <CreatePage memories={this.state.memories} />
+                    }/>
+                </Switch>
             </div>
         )
     }

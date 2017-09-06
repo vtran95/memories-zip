@@ -45,33 +45,33 @@ class App extends Component {
       <div className="App">
         <Router>
           <div>
-          <NavBar
-            user={this.state.user}
-            handleLogout={this.handleLogout}
-          />
-          <Switch>
-            <Route exact path='/' render={() => 
-              <WelcomePage />
-            }/>
-            <Route exact path='/memories' render={() => (
-              userService.getUser() ? 
-              <MemoriesIndex />
-                  :
-              <Redirect to='/login' />
-            )}/>
-            <Route exact path='/signup' render={(props) => 
-              <SignupPage 
-                {...props}
-                handleSignup={this.handleSignup}
-              />
-            }/>
-            <Route exact path='/login' render={(props) => 
-              <LoginPage
-                {...props}
-                handleLogin={this.handleLogin}
-              />
-            }/>
-          </Switch>
+            <NavBar
+              user={this.state.user}
+              handleLogout={this.handleLogout}
+            />
+            <Switch>
+              <Route exact path='/' render={() => 
+                <WelcomePage />
+              }/>
+              <Route path='/memories' render={() => (
+                userService.getUser() ? 
+                <MemoriesIndex />
+                    :
+                <Redirect to='/login' />
+              )}/>
+              <Route exact path='/signup' render={(props) => 
+                <SignupPage 
+                  {...props}
+                  handleSignup={this.handleSignup}
+                />
+              }/>
+              <Route exact path='/login' render={(props) => 
+                <LoginPage
+                  {...props}
+                  handleLogin={this.handleLogin}
+                />
+              }/>
+            </Switch>
           </div>
         </Router>
       </div>
