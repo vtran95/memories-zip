@@ -8,7 +8,6 @@ function index() {
         if (res.ok) return res.json();
         throw new Error('Bad credentials');
     })
-    .then(memories => memories);
 };
 
 function create(body) {
@@ -17,7 +16,6 @@ function create(body) {
         if (res.ok) return res.json();
         throw new Error('Post failed');
     })
-    .then(memory => memory);
 };
 
 /*----- Helper Functions -----*/

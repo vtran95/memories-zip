@@ -34,8 +34,11 @@ class IndexPage extends Component {
                     <Route exact path='/memories' render={() => 
                         <MemoriesList memories={this.state.memories} />
                     }/>
-                    <Route exact path='/memories/new' render={() => 
-                        <CreatePage memories={this.state.memories} />
+                    <Route exact path='/memories/new' render={() =>
+                        <CreatePage
+                            {...this.props}
+                            memories={this.state.memories} 
+                        />
                     }/>
                 </Switch>
             </div>

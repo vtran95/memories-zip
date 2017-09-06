@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import memoriesAPI from '../../utils/memoriesAPI';
+import imgurAPI from '../../utils/imgurAPI';
 
 class CreateForm extends Component {
   constructor(props) {
@@ -9,7 +10,8 @@ class CreateForm extends Component {
       date: '',
       location: '',
       description: '',
-      images: ''
+      images: [],
+      imageFiles: []
     };
   }
 
@@ -20,27 +22,32 @@ class CreateForm extends Component {
   }
 
   handleImageChange = (e) => {
-      console.log(e.target.value);
-      var formData = new FormData();
-      formData.append('image', e.target.files[0]);
-      fetch('https://api.imgur.com/3/image', {
-          method: 'POST',
-          body: formData,
-          headers: new Headers({
-              'Authorization': 'Client-ID fa87f6b4881ff83'
-          })
-      }).then(res => res.json())
-      .then(data => console.log(data))
-      .catch((err) => console.log(err))
+      console.log('files: ', e.target.files);
+      console.log('1st file: ', e.target.files[0]);
+      var imageFiles = [...this.state.imageFiles, e.target.files[0]]
+      console.log(imageFiles);
+      this.setState({
+        imageFiles
+      })
+      // var formData = new FormData();
+      // formData.append('image', e.target.files[0]);
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
     console.log(this.state);
-    memoriesAPI.create(this.state)
-      .then(() => {
-        this.props.history.push('/');
-      })
+    imgurAPI.imgUpload(this.state.imageFiles)
+    .then((images) => {
+      console.log(images);
+      this.setState({images}, function() {
+        var {imageFiles, ...state} = this.state;
+        console.log(state);
+        memoriesAPI.create(state)
+        .then(() => {
+          this.props.history.push('/');
+        })
+      });
+    })
   }
 
   isFormInvalid() {
@@ -74,7 +81,7 @@ class CreateForm extends Component {
           </div>
           <div className="form-group">
             <div className="col-sm-12">
-              <input type="file" className="form-control" placeholder="Image" onChange={(e) => this.handleImageChange(e)} />
+              <input type="file" className="form-control" onChange={(e) => this.handleImageChange(e)} multiple />
             </div>
           </div>
           <div className="form-group">

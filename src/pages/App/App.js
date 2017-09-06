@@ -53,9 +53,9 @@ class App extends Component {
               <Route exact path='/' render={() => 
                 <WelcomePage />
               }/>
-              <Route path='/memories' render={() => (
+              <Route path='/memories' render={(props) => (
                 userService.getUser() ? 
-                <MemoriesIndex />
+                <MemoriesIndex {...props} />
                     :
                 <Redirect to='/login' />
               )}/>
