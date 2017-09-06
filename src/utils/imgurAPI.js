@@ -1,5 +1,7 @@
+import tokenService from './tokenService';
 
-function imgUpload(imageFiles) {
+function imgUpload(imageFiles, cid) {
+    console.log(cid);
     return new Promise(function(resolve, reject) {
         if(imageFiles.length) {
             var promises = [];
@@ -9,7 +11,7 @@ function imgUpload(imageFiles) {
                         method: 'POST',
                         body: file,
                         headers: new Headers({
-                            'Authorization': 'Client-ID '
+                            'Authorization': 'Client-ID ' + cid
                         })
                     })
                     .then(res => res.json())
@@ -23,6 +25,19 @@ function imgUpload(imageFiles) {
     });
 }
 
+function getCID() {
+    return new Promise(function(resolve, reject) {
+        fetch('/api/imgur', {
+            method: 'GET',
+            headers: new Headers({'Authorization': 'Bearer ' + tokenService.getToken()})
+        })
+        .then(res => {
+            resolve(res.json())
+        })
+    })
+}
+
 export default {
-    imgUpload
+    imgUpload,
+    getCID
 }

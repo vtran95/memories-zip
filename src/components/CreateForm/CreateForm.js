@@ -11,7 +11,8 @@ class CreateForm extends Component {
       location: '',
       description: '',
       images: [],
-      imageFiles: []
+      imageFiles: [],
+      cid: ''
     };
   }
 
@@ -22,25 +23,31 @@ class CreateForm extends Component {
   }
 
   handleImageChange = (e) => {
-      console.log('files: ', e.target.files);
-      console.log('1st file: ', e.target.files[0]);
-      var imageFiles = [...this.state.imageFiles, e.target.files[0]]
-      console.log(imageFiles);
-      this.setState({
-        imageFiles
-      })
-      // var formData = new FormData();
-      // formData.append('image', e.target.files[0]);
+    console.log('files: ', e.target.files);
+    var p = e.target.files;
+    var imageFiles = [...this.state.imageFiles]
+    if (p) {
+      for (var key in p) {
+        if (p.hasOwnProperty(key)) {
+          console.log(key + " -> " + p[key]);
+          imageFiles.push(p[key]);
+        }
+      }
+    }
+    console.log(imageFiles);
+    this.setState({
+      imageFiles
+    })
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
     console.log(this.state);
-    imgurAPI.imgUpload(this.state.imageFiles)
+    imgurAPI.imgUpload(this.state.imageFiles, this.state.cid)
     .then((images) => {
       console.log(images);
       this.setState({images}, function() {
-        var {imageFiles, ...state} = this.state;
+        var {imageFiles, cid, ...state} = this.state;
         console.log(state);
         memoriesAPI.create(state)
         .then(() => {
@@ -52,6 +59,14 @@ class CreateForm extends Component {
 
   isFormInvalid() {
     return !(this.state.title && this.state.date);
+  }
+
+  componentDidMount() {
+    imgurAPI.getCID()
+    .then(cidObj => {
+      var cid = cidObj.cid
+      this.setState({cid})
+    })
   }
 
   render() {

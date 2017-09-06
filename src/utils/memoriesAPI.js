@@ -11,10 +11,12 @@ function index() {
 };
 
 function create(body) {
-    return fetch(BASE_URL, getAuthRequestOptions('POST', body))
-    .then(res => {
-        if (res.ok) return res.json();
-        throw new Error('Post failed');
+    return new Promise(function(resolve, reject) {
+        fetch(BASE_URL, getAuthRequestOptions('POST', body))
+        .then(res => {
+            if (res.ok) resolve(res.json());
+            throw new Error('Post failed');
+        })
     })
 };
 
