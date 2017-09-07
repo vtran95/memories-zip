@@ -1,11 +1,12 @@
 import React from 'react';
+import WelcomeHeader from '../../components/WelcomeHeader/WelcomeHeader';
 
 const WelcomePage = (props) => {
     return (
         <div>
-            <h1>Welcome!</h1>
+            <WelcomeHeader />
         </div>
     )
 }
 
-export default WelcomePage
+export default WelcomePage;

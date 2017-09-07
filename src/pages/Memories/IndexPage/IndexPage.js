@@ -8,6 +8,7 @@ import './IndexPage.css';
 import memoriesAPI from '../../../utils/memoriesAPI';
 import MemoriesList from '../../../components/MemoriesList/MemoriesList';
 import CreatePage from '../CreatePage/CreatePage';
+import ShowMemoryPage from '../ShowMemoryPage/ShowMemoryPage';
 
 class IndexPage extends Component {
     constructor() {
@@ -34,11 +35,23 @@ class IndexPage extends Component {
                     <Route exact path='/memories' render={() => 
                         <MemoriesList memories={this.state.memories} />
                     }/>
-                    <Route exact path='/memories/new' render={() =>
+                    <Route exact path='/memories/new' render={(props) =>
                         <CreatePage
                             {...this.props}
                             memories={this.state.memories} 
                         />
+                    }/>
+                    <Route exact path='/memories/:id' render={(props) => {
+                        var memory = this.state.memories.find((mem) => {
+                            return mem._id === props.match.params.id
+                        });
+                        console.log(memory);
+                        return(
+                        <ShowMemoryPage
+                            {...this.props}
+                            memory={memory}
+                        />)
+                    }
                     }/>
                 </Switch>
             </div>

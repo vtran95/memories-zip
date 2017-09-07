@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import './CreateForm.css';
 import memoriesAPI from '../../utils/memoriesAPI';
 import imgurAPI from '../../utils/imgurAPI';
 
@@ -51,7 +52,7 @@ class CreateForm extends Component {
         console.log(state);
         memoriesAPI.create(state)
         .then(() => {
-          this.props.history.push('/');
+          this.props.history.push('/memories');
         })
       });
     })
@@ -73,7 +74,7 @@ class CreateForm extends Component {
     return (
       <div>
         <header>Create Memory</header>
-        <form className="form-horizontal" onSubmit={this.handleSubmit} encType="multipart/form-data">
+        <form className="CreateForm" onSubmit={this.handleSubmit} encType="multipart/form-data">
           <div className="form-group">
             <div className="col-sm-12">
               <input type="text" className="form-control" placeholder="Title" value={this.state.title} onChange={(e) => this.handleChange('title', e)} />
@@ -100,7 +101,7 @@ class CreateForm extends Component {
             </div>
           </div>
           <div className="form-group">
-            <div className="col-sm-12 text-center">
+            <div className="col-sm-6 text-center">
               <button className="btn btn-default" disabled={this.isFormInvalid()}>Create Memory</button>&nbsp;&nbsp;
             </div>
           </div>

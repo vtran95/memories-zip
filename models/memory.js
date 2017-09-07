@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 var memorySchema = new Schema({
     creator: {type: Schema.Types.ObjectId, ref: 'User'},
     title: String,
-    date: Date,
+    date: String,
     location: String,
     description: String,
     images: [String]

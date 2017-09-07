@@ -14,11 +14,14 @@ function create(body) {
     return new Promise(function(resolve, reject) {
         fetch(BASE_URL, getAuthRequestOptions('POST', body))
         .then(res => {
-            if (res.ok) resolve(res.json());
-            throw new Error('Post failed');
+            resolve(res.json());
         })
     })
 };
+
+function deleteMemory(id) {
+    fetch(BASE_URL + '/' + id, getAuthRequestOptions('DELETE'))
+}
 
 /*----- Helper Functions -----*/
 
@@ -40,5 +43,6 @@ function getAuthRequestOptions(method, body) {
 
 export default {
     index,
-    create
+    create,
+    delete: deleteMemory
 };

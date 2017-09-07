@@ -1,4 +1,5 @@
 const Memory = require('../models/memory');
+const User = require('../models/user');
 
 const fakeMemories = [
     {title: 'World Domination', date: 'Sept 12, 2016'},
@@ -6,27 +7,48 @@ const fakeMemories = [
 ]
 
 function index(req, res) {
-    console.log(req.user);
-    Memory.find({}, (err, memories) => {
-        if(memories.length) {
-            res.status(200).json()
+    User.findById(req.user._id).populate('memories').exec((err, user) => {
+        if(user.memories.length) {
+            res.status(200).json(user.memories)
         } else {
-            res.json([{title: 'No memories'}])
+            res.status(200).json([{title: null,
+                                   date: null,
+                                   location: null,
+                                   description: null,
+                                   images: []}])
         }
     })
 }
 
 function create(req, res) {
     console.log(req.body);
-    // var newMemory = new Memory(req.body);
-    // newMemory.creator = req.user.id;
-    // User.findOne(req.user.id).exec().then(user => {
-    //     if (!user) return res.status(401).json({err: 'Not logged in'});
+    var newMemory = new Memory(req.body);
+    console.log(req.user._id)
+    newMemory.creator = req.user._id;
+    newMemory.save((err, memory) => {
+        User.findById(req.user._id, (err, user) => {
+            console.log(user)
+            console.log(memory)
+            user.memories.push(memory._id);
+            user.save(() => res.status(201).json())
+        })
+    })
+}
 
-    // })
+function deleteMemory(req, res) {
+    User.findById(req.user._id, (err, user) => {
+        user.memories.remove(req.params.id);
+        user.save(() => {
+            Memory.findById(req.params.id, (err, memory) => {
+                memory.remove();
+                res.status(200);
+            })
+        })
+    })
 }
 
 module.exports = {
     index,
-    create
+    create,
+    delete: deleteMemory
 };
