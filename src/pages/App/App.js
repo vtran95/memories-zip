@@ -50,8 +50,10 @@ class App extends Component {
               handleLogout={this.handleLogout}
             />
             <Switch>
-              <Route exact path='/' render={() => 
-                <WelcomePage />
+              <Route exact path='/' render={(props) => 
+                <WelcomePage 
+                  {...props}
+                />
               }/>
               <Route path='/memories' render={(props) => (
                 userService.getUser() ? 

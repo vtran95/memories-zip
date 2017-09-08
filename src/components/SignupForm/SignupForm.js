@@ -39,36 +39,38 @@ class SignupForm extends Component {
 
   render() {
     return (
-      <div>
-        <header className="header-footer">Sign Up</header>
+      <div className="row">
+        <div className="col s6 offset-s3">
+        <h2>Sign Up</h2>
         <form className="form-horizontal" onSubmit={this.handleSubmit} >
-          <div className="form-group">
-            <div className="col-sm-12">
+          <div className="row">
+            <div className="col s12">
               <input type="text" className="form-control" placeholder="Name" value={this.state.name} onChange={(e) => this.handleChange('name', e)} />
             </div>
           </div>
-          <div className="form-group">
-            <div className="col-sm-12">
+          <div className="row">
+            <div className="col s12">
               <input type="email" className="form-control" placeholder="Email" value={this.state.email} onChange={(e) => this.handleChange('email', e)} />
             </div>
           </div>
-          <div className="form-group">
-            <div className="col-sm-12">
+          <div className="row">
+            <div className="col s12">
               <input type="password" className="form-control" placeholder="Password" value={this.state.password} onChange={(e) => this.handleChange('password', e)} />
             </div>
           </div>
-          <div className="form-group">
-            <div className="col-sm-12">
+          <div className="row">
+            <div className="col s12">
               <input type="password" className="form-control" placeholder="Confirm Password" value={this.state.passwordConf} onChange={(e) => this.handleChange('passwordConf', e)} />
             </div>
           </div>
-          <div className="form-group">
-            <div className="col-sm-12 text-center">
+          <div className="row">
+            <div className="col s12 text-center">
               <button className="btn btn-default" disabled={this.isFormInvalid()}>Sign Up</button>&nbsp;&nbsp;
               <Link to='/'>Cancel</Link>
             </div>
           </div>
         </form>
+        </div>
       </div>
     );
   }

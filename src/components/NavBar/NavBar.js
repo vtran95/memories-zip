@@ -27,7 +27,7 @@ const NavBar = (props) => {
       </div>;
   
     return (
-      <Navbar brand='home' right>
+      <Navbar brand='memories.zip' right>
         {nav}
       </Navbar>
     );

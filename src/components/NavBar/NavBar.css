@@ -14,5 +14,11 @@
 } */
 
 nav {
-    background-color: rgba(79,98,114,0.3);
+    font-family: 'Encode Sans Condensed', sans-serif;
+    background-color: rgba(79,98,114,0.35);
+    padding: 0 10px;
+}
+
+.NavBar-link, .NavBar-welcome {
+    font-size: 16px;
 }

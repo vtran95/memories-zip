@@ -5,3 +5,16 @@
 .MemoryEntry-header {
     margin-left: 11.25px;
 }
+
+.MemoryEntry-title {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.MemoryEntry-date {
+    font-family: 'Lora', serif;
+    font-style: italic;
+}
+
+.MemoryEntry-location {
+    font-family: 'Montserrat', sans-serif;
+}

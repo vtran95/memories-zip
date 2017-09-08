@@ -1,0 +1,25 @@
+.WelcomeBody {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.WelcomeBody-steps {
+    margin: 20px;
+    width: 290px;
+}
+
+.WelcomeBody-steps h2 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.WelcomeBody-StepsInfo {
+    display: flex;
+    align-items: center;
+}
+
+.WelcomeBody-text {
+    font-size: 25px;
+    font-weight: 600;
+    margin: 5px;
+}
