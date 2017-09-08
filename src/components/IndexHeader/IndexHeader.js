@@ -6,7 +6,7 @@ const IndexHeader = (props) => {
 
     return (
         <div className="MemList-header">
-            <h2>Memories</h2>
+            <h2 className="MemIndex-title">Memories</h2>
             <Link className='btn new-button' to='/memories/new'>New</Link>
         </div>
     );

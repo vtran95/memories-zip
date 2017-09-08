@@ -81,7 +81,7 @@ class MemoryShow extends Component {
                         <h2>{this.state.memory.title}</h2>
                         <div className="MemoryShow-buttons">
                             {/* <Link className="btn" to={"/memories/"+ this.props.match.params.id +"/edit"}>Edit</Link> */}
-                            <button className="btn" onClick={this.handleDelete}>Delete</button>
+                            <button className="btn red" onClick={this.handleDelete}>Delete</button>
                         </div>
                     </div>
                     <h4>{this.state.memory.date} - {this.state.memory.location}</h4>
@@ -98,9 +98,11 @@ class MemoryShow extends Component {
                         }
                     </div>
                 </div>
-                {this.state.memory.images.map(image =>
-                    <img key={image} src={image} style={{width: 250}}/>                
-                )}
+                <div className="MemoryShow-images">
+                    {this.state.memory.images.map(image =>
+                        <img key={image} src={image} style={{width: 400, height: 300}} className="MemoryShow-img" />                
+                    )}
+                </div>
             </div>
         );
     }

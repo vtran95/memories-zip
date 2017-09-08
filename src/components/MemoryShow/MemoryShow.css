@@ -31,3 +31,11 @@
 .MemoryShow-AddBtn {
     margin: 10px;
 }
+
+.MemoryShow-images {
+    margin: 0 23px 50px 23px;
+}
+
+.MemoryShow-img {
+    margin: 0 3px;
+}

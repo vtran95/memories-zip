@@ -30,26 +30,28 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <div>
-        <header className="header-footer">Log In</header>
+      <div className="row">
+        <div className="col s12 offset-s3">
+        <h2>Log In</h2>
         <form className="form-horizontal" onSubmit={this.handleSubmit} >
-          <div className="form-group">
-            <div className="col-sm-12">
+          <div className="row">
+            <div className="col s6">
               <input type="email" className="form-control" placeholder="Email" value={this.state.email} onChange={(e) => this.handleChange('email', e)} />
             </div>
           </div>
-          <div className="form-group">
-            <div className="col-sm-12">
+          <div className="row">
+            <div className="col s6">
               <input type="password" className="form-control" placeholder="Password" value={this.state.pw} onChange={(e) => this.handleChange('pw', e)} />
             </div>
           </div>
-          <div className="form-group">
-            <div className="col-sm-12 text-center">
+          <div className="row">
+            <div className="col s6 text-center">
               <button className="btn btn-default">Log In</button>&nbsp;&nbsp;&nbsp;
               <Link to='/'>Cancel</Link>
             </div>
           </div>
         </form>
+        </div>
       </div>
     );
   }
