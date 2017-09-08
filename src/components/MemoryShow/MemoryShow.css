@@ -1,5 +1,12 @@
 .MemoryShow-info {
     display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.MemoryShow-headline {
+    display: flex;
     align-items: center;
     justify-content: center;
 }
@@ -8,7 +15,7 @@
     margin-left: 10px;
 }
 
-.MemoryShow-info .btn {
+.MemoryShow-headline .btn {
     position: relative;
     top: 5px;
     margin: 5px;

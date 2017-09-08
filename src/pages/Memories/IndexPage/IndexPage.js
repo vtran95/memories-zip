@@ -41,7 +41,7 @@ class IndexPage extends Component {
                             memories={this.state.memories}
                         />
                     }/>
-                    <Route exact path='/memories/:id' render={(props) => {
+                    <Route path='/memories/:id' render={(props) => {
                         var memory = this.state.memories.find((mem) => {
                             return mem._id === props.match.params.id
                         });

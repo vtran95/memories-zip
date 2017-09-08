@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './CreateForm.css';
 import memoriesAPI from '../../utils/memoriesAPI';
 import imgurAPI from '../../utils/imgurAPI';
-import {Row, Input} from 'react-materialize';
+import {Row, Input, Col, Preloader} from 'react-materialize';
 
 class CreateForm extends Component {
     constructor(props) {
@@ -88,7 +88,6 @@ class CreateForm extends Component {
                                 <Input s={12} label="Description" value={this.state.description} onChange={(e) => this.handleChange('description', e)} />
                             </Row>
                             <Row>
-                                {/* <input type="file" className="form-control" onChange={(e) => this.handleImageChange(e)} multiple /> */}
                                 <div className="file-field input-field">
                                     <div className="btn">
                                         <span>File</span>
@@ -100,7 +99,7 @@ class CreateForm extends Component {
                                 </div>
                             </Row>
                             <Row>
-                                <button className="btn btn-default" disabled={this.isFormInvalid()}>Create Memory</button>&nbsp;&nbsp;
+                                <button className="btn btn-default" disabled={this.isFormInvalid()}>Create Memory</button>
                             </Row>
                         </form>
                     </div>

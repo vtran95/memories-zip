@@ -20,6 +20,13 @@ function index(req, res) {
     })
 }
 
+function show(req, res) {
+    Memory.findById(req.params.id, (err, memory) => {
+        console.log(memory)
+        res.status(200).json(memory);
+    })
+}
+
 function create(req, res) {
     console.log(req.body);
     var newMemory = new Memory(req.body);
@@ -55,6 +62,7 @@ function deleteMemory(req, res) {
 
 module.exports = {
     index,
+    show,
     create,
     update,
     delete: deleteMemory

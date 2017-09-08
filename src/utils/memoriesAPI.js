@@ -10,6 +10,14 @@ function index() {
     })
 };
 
+function show(id) {
+    return fetch(BASE_URL + '/' + id, getAuthRequestOptions('GET'))
+    .then(res => {
+        if (res.ok) return res.json();
+        throw new Error('Get memory failed');
+    })
+}
+
 function create(body) {
     return fetch(BASE_URL, getAuthRequestOptions('POST', body))
     .then(res => res.json());
@@ -47,6 +55,7 @@ function getAuthRequestOptions(method, body) {
 
 export default {
     index,
+    show,
     create,
     edit,
     delete: deleteMemory

@@ -4,14 +4,28 @@ import memoriesAPI from '../../utils/memoriesAPI';
 
 class MemoryShow extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            memory: {images: []}
+        }
+    }
+
     handleEdit = () => {
-        memoriesAPI.edit(this.props.memory._id);
+        memoriesAPI.edit(this.props.match.params.id);
     }
 
     handleDelete = () => {
-        memoriesAPI.delete(this.props.memory._id)
+        memoriesAPI.delete(this.props.match.params.id)
         .then(() => {
             this.props.history.push('/memories');
+        })
+    }
+
+    componentDidMount() {
+        memoriesAPI.show(this.props.match.params.id)
+        .then(memory => {
+            this.setState({memory}, () => console.log(this.state.memory))
         })
     }
 
@@ -19,13 +33,17 @@ class MemoryShow extends Component {
         return (
             <div>
                 <div className="MemoryShow-info">
-                    <h2>{this.props.memory.title}</h2>
-                    <div className="MemoryShow-buttons">
-                        <button className="btn" onClick={this.handleEdit}>Edit</button>
-                        <button className="btn" onClick={this.handleDelete}>Delete</button>
+                    <div className="MemoryShow-headline">
+                        <h2>{this.state.memory.title}</h2>
+                        <div className="MemoryShow-buttons">
+                            <button className="btn" onClick={this.handleEdit}>Edit</button>
+                            <button className="btn" onClick={this.handleDelete}>Delete</button>
+                        </div>
                     </div>
+                    <h4>{this.state.memory.date} - {this.state.memory.location}</h4>
+                    <h5>{this.state.memory.description}</h5>
                 </div>
-                {this.props.memory.images.map(image =>
+                {this.state.memory.images.map(image =>
                     <img key={image} src={image} style={{width: 250}}/>                
                 )}
             </div>
