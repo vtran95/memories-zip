@@ -59,11 +59,22 @@ function deleteMemory(req, res) {
     })
 }
 
+function addImages(req, res) {
+    Memory.findById(req.params.id, (err, memory) => {
+        memory.images.push.apply(memory.images, req.body)
+        console.log(memory.images)
+        memory.save((mem) => {
+            console.log(mem)
+            res.status(200).json(mem)
+        })
+    })
+}
 
 module.exports = {
     index,
     show,
     create,
     update,
-    delete: deleteMemory
+    delete: deleteMemory,
+    addImages
 };

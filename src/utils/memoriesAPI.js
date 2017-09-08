@@ -35,10 +35,18 @@ function deleteMemory(id) {
     return fetch(BASE_URL + '/' + id, getAuthRequestOptions('DELETE'))
 }
 
+function addImage(id, body) {
+    return fetch(BASE_URL + '/' + id + '/add', getAuthRequestOptions('PUT', body))
+    .then(res => {
+        if (res.ok) return res.json();
+        throw new Error('Add image failed');
+    })
+}
+
 /*----- Helper Functions -----*/
 
 function getAuthRequestOptions(method, body) {
-    if (method.toLowerCase() === 'post') {
+    if (method.toLowerCase() === 'post' || method.toLowerCase() === 'put') {
         return {
             method: method,
             headers: new Headers({'Authorization': 'Bearer ' + tokenService.getToken(),
@@ -58,5 +66,6 @@ export default {
     show,
     create,
     edit,
-    delete: deleteMemory
+    delete: deleteMemory,
+    addImage
 };
