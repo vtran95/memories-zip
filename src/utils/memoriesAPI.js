@@ -11,16 +11,20 @@ function index() {
 };
 
 function create(body) {
-    return new Promise(function(resolve, reject) {
-        fetch(BASE_URL, getAuthRequestOptions('POST', body))
-        .then(res => {
-            resolve(res.json());
-        })
-    })
+    return fetch(BASE_URL, getAuthRequestOptions('POST', body))
+    .then(res => res.json());
 };
 
+function edit(id) {
+    return fetch(BASE_URL + '/' + id, getAuthRequestOptions('PUT'))
+    .then(res => {
+        if (res.ok) return res.json();
+        throw new Error('Update failed');
+    })
+}
+
 function deleteMemory(id) {
-    fetch(BASE_URL + '/' + id, getAuthRequestOptions('DELETE'))
+    return fetch(BASE_URL + '/' + id, getAuthRequestOptions('DELETE'))
 }
 
 /*----- Helper Functions -----*/
@@ -44,5 +48,6 @@ function getAuthRequestOptions(method, body) {
 export default {
     index,
     create,
+    edit,
     delete: deleteMemory
 };

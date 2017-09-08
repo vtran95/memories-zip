@@ -1,29 +1,31 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
+import React, {Component} from 'react';
+import './MemoriesList.css';
+import MemoryEntry from '../MemoryEntry/MemoryEntry';
+import memoriesAPI from '../../utils/memoriesAPI';
 
-const MemoriesList = (props) => {
+class MemoriesList extends Component {
+    constructor() {
+        super();
+        this.state = {
+            memories: []
+        }
+    }
 
-    return (
-        <table>
-            <tbody>
-                {props.memories.map(memory =>
-                    <div>
-                    <tr key={memory._id}>
-                        <td><Link to={'/memories/' + memory._id}>{memory.title}</Link></td>
-                        <td>{memory.date}</td>
-                        <td>{memory.location}</td>
-                        <td>{memory.description}</td>
-                    </tr>
-                    <tr>
-                        {memory.images.map(image => 
-                            <td><img src={image} style={{width: 200}}/></td>
-                        )}
-                    </tr>
-                    </div>
+    componentDidMount() {
+        memoriesAPI.index().then(memories => 
+            this.setState({memories})
+        );
+    }
+
+    render() {
+        return (
+            <div>
+                {this.state.memories.map(memory =>
+                    <MemoryEntry key={memory._id} memory={memory} />
                 )}
-            </tbody>
-        </table>
-    );
-};
+            </div>
+        );
+    }
+}
 
 export default MemoriesList;

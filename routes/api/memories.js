@@ -6,6 +6,7 @@ var memoriesCtrl = require('../../controllers/memories-controller');
 
 router.get('/', checkAuth, memoriesCtrl.index);
 router.post('/', checkAuth, memoriesCtrl.create);
+router.put('/:id', checkAuth, memoriesCtrl.update);
 router.delete('/:id', checkAuth, memoriesCtrl.delete);
 
 /*----- Helper Functions -----*/

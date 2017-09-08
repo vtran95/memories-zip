@@ -3,7 +3,7 @@ import './WelcomeHeader.css';
 
 const WelcomeHeader = () => {
     return (
-        <header className="masthead">
+        <header style={{backgroundImage: "url('http://www.ayk-i.com/wp-content/uploads/2015/10/KYRFNLK23V.jpg')"}} className="masthead">
 
         </header>
     )

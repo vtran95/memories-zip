@@ -44,7 +44,7 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          <div>
+          <div className="AppPage">
             <NavBar
               user={this.state.user}
               handleLogout={this.handleLogout}

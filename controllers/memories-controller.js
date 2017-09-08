@@ -30,9 +30,13 @@ function create(req, res) {
             console.log(user)
             console.log(memory)
             user.memories.push(memory._id);
-            user.save(() => res.status(201).json())
+            user.save(() => res.status(201).json(memory))
         })
     })
+}
+
+function update(req, res) {
+    console.log(req.params)
 }
 
 function deleteMemory(req, res) {
@@ -42,13 +46,16 @@ function deleteMemory(req, res) {
             Memory.findById(req.params.id, (err, memory) => {
                 memory.remove();
                 res.status(200);
+                res.end();
             })
         })
     })
 }
 
+
 module.exports = {
     index,
     create,
+    update,
     delete: deleteMemory
 };

@@ -1,0 +1,15 @@
+.MemoryShow-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.MemoryShow-buttons {
+    margin-left: 10px;
+}
+
+.MemoryShow-info .btn {
+    position: relative;
+    top: 5px;
+    margin: 5px;
+}
