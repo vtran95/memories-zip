@@ -1,0 +1,8 @@
+.AddFile-inputs {
+    display: flex;
+    align-items: center;
+}
+
+.AddFile-save {
+    margin-left: 25px;
+}

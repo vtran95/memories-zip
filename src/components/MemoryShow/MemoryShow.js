@@ -1,15 +1,58 @@
 import React, {Component} from 'react';
 import './MemoryShow.css';
 import memoriesAPI from '../../utils/memoriesAPI';
+import imgurAPI from '../../utils/imgurAPI';
 import {Link} from 'react-router-dom';
+import AddFile from '../AddFile/AddFile';
 
 class MemoryShow extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            memory: {images: []}
+            memory: {images: []},
+            imageFiles: [],
+            inputVisible: false
         }
+    }
+
+    toggleButton = () => {
+        this.setState({inputVisible: !this.state.inputVisible})
+    }
+
+    handleImageChange = (e) => {
+        console.log('files: ', e.target.files);
+        var p = e.target.files;
+        var imageFiles = [...this.state.imageFiles]
+        if (p) {
+            for (var key in p) {
+                if (p.hasOwnProperty(key)) {
+                    console.log(key + " -> " + p[key]);
+                    imageFiles.push(p[key]);
+                }
+            }
+        }
+        console.log(imageFiles);
+        this.setState({
+            imageFiles
+        })
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        if (!this.state.imageFiles.length) return;
+        imgurAPI.getCID()
+        .then(cidObj => {
+            var cid = cidObj.cid
+            return cid
+        })
+        .then(cid => imgurAPI.imgUpload(this.state.imageFiles, cid))
+        .then((images) => {
+            memoriesAPI.addImage(this.state.memory._id, images)
+            .then(() => {
+                this.props.history.push('/memories');
+            })
+        });
     }
 
     handleEdit = () => {
@@ -43,6 +86,17 @@ class MemoryShow extends Component {
                     </div>
                     <h4>{this.state.memory.date} - {this.state.memory.location}</h4>
                     <h5>{this.state.memory.description}</h5>
+                    <div className="MemoryShow-AddFile">
+                        <button className="btn MemoryShow-AddBtn" onClick={this.toggleButton}>Add Image</button>
+                        {
+                            this.state.inputVisible
+                                ? <AddFile 
+                                        handleImageChange={this.handleImageChange} 
+                                        handleSubmit={this.handleSubmit}
+                                    />
+                                : null
+                        }
+                    </div>
                 </div>
                 {this.state.memory.images.map(image =>
                     <img key={image} src={image} style={{width: 250}}/>                

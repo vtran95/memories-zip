@@ -9,6 +9,7 @@ router.get('/:id', checkAuth, memoriesCtrl.show);
 router.post('/', checkAuth, memoriesCtrl.create);
 router.put('/:id', checkAuth, memoriesCtrl.update);
 router.delete('/:id', checkAuth, memoriesCtrl.delete);
+router.put('/:id/add', checkAuth, memoriesCtrl.addImages);
 
 /*----- Helper Functions -----*/
 
