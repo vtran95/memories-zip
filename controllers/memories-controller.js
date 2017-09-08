@@ -21,6 +21,10 @@ function index(req, res) {
 }
 
 function show(req, res) {
+    if(req.params.id === undefined) {
+        res.end();
+        return;
+    }
     Memory.findById(req.params.id, (err, memory) => {
         console.log(memory)
         res.status(200).json(memory);
@@ -47,6 +51,10 @@ function update(req, res) {
 }
 
 function deleteMemory(req, res) {
+    if(req.params.id === undefined) {
+        res.end();
+        return;
+    }
     User.findById(req.user._id, (err, user) => {
         user.memories.remove(req.params.id);
         user.save(() => {
@@ -60,6 +68,10 @@ function deleteMemory(req, res) {
 }
 
 function addImages(req, res) {
+    if(req.params.id === undefined) {
+        res.end();
+        return;
+    }
     Memory.findById(req.params.id, (err, memory) => {
         memory.images.push.apply(memory.images, req.body)
         console.log(memory.images)
