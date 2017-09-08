@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './MemoryShow.css';
 import memoriesAPI from '../../utils/memoriesAPI';
+import {Link} from 'react-router-dom';
 
 class MemoryShow extends Component {
 
@@ -36,7 +37,7 @@ class MemoryShow extends Component {
                     <div className="MemoryShow-headline">
                         <h2>{this.state.memory.title}</h2>
                         <div className="MemoryShow-buttons">
-                            <button className="btn" onClick={this.handleEdit}>Edit</button>
+                            {/* <Link className="btn" to={"/memories/"+ this.props.match.params.id +"/edit"}>Edit</Link> */}
                             <button className="btn" onClick={this.handleDelete}>Delete</button>
                         </div>
                     </div>
