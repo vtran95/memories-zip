@@ -2,6 +2,10 @@
   "name": "memories-zip",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "8.1.2",
+    "npm": "6.4.1"
+  },
   "dependencies": {
     "bcrypt": "^1.0.3",
     "body-parser": "^1.17.2",
