@@ -26,10 +26,14 @@ const MemoryEntry = (props) => {
             <div className="MemoryEntry-header">
                 <div>
                     <h3>
-                        <Link to={'/memories/' + props.memory._id}>
-                            <span className="MemoryEntry-title">{props.memory.title} - </span> 
-                            <span className="MemoryEntry-date">{props.memory.date}</span>
-                        </Link>
+                        {
+                            props.memory._id 
+                                ? <Link to={'/memories/' + props.memory._id}>
+                                    <span className="MemoryEntry-title">{props.memory.title} - </span> 
+                                    <span className="MemoryEntry-date">{props.memory.date}</span>
+                                  </Link>
+                                 : null
+                        }
                     </h3>
                     <hr/>
                 </div>
