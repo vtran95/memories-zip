@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import './CreateForm.css';
 import memoriesAPI from '../../utils/memoriesAPI';
 import imgurAPI from '../../utils/imgurAPI';
-import {Row, Input, Col, Preloader} from 'react-materialize';
+import {Row, TextInput, DatePicker} from 'react-materialize';
+import moment from 'moment';
 
 class CreateForm extends Component {
     constructor(props) {
@@ -21,6 +22,13 @@ class CreateForm extends Component {
     handleChange = (field, e) => {
         this.setState({
             [field]: e.target.value
+        }, () => {console.log(this.state)});
+    }
+
+    handleDateChange = (e) => {
+        var formatDate = moment(e.target.value).format('MMM Do, YYYY');
+        this.setState({
+            date: formatDate
         }, () => {console.log(this.state)});
     }
 
@@ -76,16 +84,24 @@ class CreateForm extends Component {
                         <h2>Create Memory</h2>
                         <form className="CreateForm" onSubmit={this.handleSubmit} encType="multipart/form-data">
                             <Row>
-                                <Input s={12} label="Title - required" value={this.state.title} onChange={(e) => this.handleChange('title', e)} />
+                                <TextInput s={12} label="Title - required" value={this.state.title} onChange={(e) => this.handleChange('title', e)} />
                             </Row>
                             <Row>
-                                <Input s={12} label="Date - required" value={this.state.date} onChange={(e) => this.handleChange('date', e)} type="date" />
+                                <DatePicker s={12} label="Date - required" value={this.state.date} options={{format: 'mmm dd, yyyy'}}
+                                    onChange={(newDate) => {
+                                        this.handleDateChange({
+                                            target: {
+                                                value: newDate
+                                            }
+                                        })
+                                    }}
+                                />
                             </Row>
                             <Row>
-                                <Input s={12} label="Location" value={this.state.location} onChange={(e) => this.handleChange('location', e)} />
+                                <TextInput s={12} label="Location" value={this.state.location} onChange={(e) => this.handleChange('location', e)} />
                             </Row>
                             <Row>
-                                <Input s={12} label="Description" value={this.state.description} onChange={(e) => this.handleChange('description', e)} />
+                                <TextInput s={12} label="Description" value={this.state.description} onChange={(e) => this.handleChange('description', e)} />
                             </Row>
                             <Row>
                                 <div className="file-field input-field">

@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import './App.css';
 import userService from '../../utils/userService';
-import NavBar from '../../components/NavBar/NavBar';
+import NaviBar from '../../components/NaviBar/NaviBar';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import WelcomePage from '../WelcomePage/WelcomePage';
@@ -45,7 +45,7 @@ class App extends Component {
       <div className="App">
         <Router>
           <div className="AppPage">
-            <NavBar
+            <NaviBar
               user={this.state.user}
               handleLogout={this.handleLogout}
             />

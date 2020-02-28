@@ -16,9 +16,13 @@
 nav {
     font-family: 'Encode Sans Condensed', sans-serif;
     background-color: rgba(79,98,114,0.35);
-    padding: 0 10px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10pt;
 }
 
 .NavBar-link, .NavBar-welcome {
-    font-size: 16px;
+    font-size: 16pt;
+    padding: 0 10pt;
 }
+

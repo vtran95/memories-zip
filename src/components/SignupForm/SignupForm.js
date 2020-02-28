@@ -24,7 +24,7 @@ class SignupForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     userService.signup(this.state)
-      // successfully signed up - show GamePage
+      // successfully signed up - show WelcomePage
       .then(() => {
         this.props.handleSignup();
         this.props.history.push('/');

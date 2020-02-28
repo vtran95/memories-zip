@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import {
     Switch,
-    Route,
-    Link
+    Route
 } from 'react-router-dom';
 import './IndexPage.css';
 import memoriesAPI from '../../../utils/memoriesAPI';
